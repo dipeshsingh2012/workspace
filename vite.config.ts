@@ -26,6 +26,8 @@ export default defineConfig(() => {
     target: 'esnext',
     minify: true,
     cssCodeSplit: false,
+    assetsDir: '',
+    sourcemap: false, // Keep the remote bundle light
     rollupOptions: {
       input: 'src/App.tsx',
     },
