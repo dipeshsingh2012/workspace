@@ -21,6 +21,7 @@ export default defineConfig({
     }),
   ],
   build: {
+    assetsInlineLimit: 0,
     modulePreload: false,
     target: 'esnext',
     minify: false,
