@@ -4,10 +4,7 @@ node_modules/
 # Production
 dist/
 dist-ssr/
-*.local
 
-# Environment variables
-.env*
-
-# Editor and OS files
-.DS_Store
+# Local Environment
+.env
+.env.local

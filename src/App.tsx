@@ -1,5 +1,6 @@
-import React from 'react';
-import { createBrowserRouter, RouterProvider, Link, Outlet } from 'react-router-dom';
+import { FC } from 'react';
+import { Routes, Route, Link, Outlet } from 'react-router-dom';
+import './index.css';
 import { 
   Button, 
   StyledEngineProvider, 
@@ -14,13 +15,22 @@ import {
   ListItemButton, 
   ListItemIcon, 
   ListItemText, 
-  CssBaseline 
+  CssBaseline,
+  createTheme,
+  ThemeProvider
 } from '@mui/material';
 import { Home as HomeIcon, Info as InfoIcon, Dashboard as DashboardIcon } from '@mui/icons-material';
 
+// Create a theme with a component prefix to avoid class name collisions with the Host
+const theme = createTheme({
+  cssVariables: {
+    colorSchemeSelector: 'class'
+  }
+});
+
 const drawerWidth = 240;
 
-const DashboardLayout: React.FC = () => {
+const DashboardLayout: FC<{ basename: string }> = ({ basename }) => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -44,13 +54,13 @@ const DashboardLayout: React.FC = () => {
         <Box sx={{ overflow: 'auto' }}>
           <List>
             <ListItem disablePadding>
-              <ListItemButton component={Link} to="/">
+              <ListItemButton component={Link} to={basename || '/'}>
                 <ListItemIcon><HomeIcon /></ListItemIcon>
                 <ListItemText primary="Dashboard" />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton component={Link} to="/about">
+              <ListItemButton component={Link} to={`${basename}/about`.replace(/\/+/g, '/') || '/about'}>
                 <ListItemIcon><InfoIcon /></ListItemIcon>
                 <ListItemText primary="About" />
               </ListItemButton>
@@ -67,7 +77,7 @@ const DashboardLayout: React.FC = () => {
   );
 };
 
-const Home: React.FC = () => (
+const Home: FC = () => (
   <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
     <h1 className="text-2xl font-bold text-slate-800 mb-4">Dashboard Overview</h1>
     <p className="mb-6 text-slate-600">Welcome to your admin panel. This layout combines MUI structure with Tailwind styling.</p>
@@ -77,7 +87,7 @@ const Home: React.FC = () => (
   </div>
 );
 
-const About: React.FC = () => (
+const About: FC = () => (
   <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
     <h1 className="text-2xl font-bold text-slate-800">About Workspace</h1>
     <p className="mt-4 text-slate-600">This is a micro-frontend remote application running on React 19.</p>
@@ -88,21 +98,17 @@ interface AppProps {
   basename?: string;
 }
 
-export function App({ basename = '/' }: AppProps) {
-  const router = React.useMemo(() => createBrowserRouter([
-    {
-      path: '/',
-      element: <DashboardLayout />,
-      children: [
-        { index: true, element: <Home /> },
-        { path: 'about', element: <About /> },
-      ],
-    },
-  ], { basename }), [basename]);
-
+function App({ basename = '' }: AppProps) {
   return (
     <StyledEngineProvider injectFirst>
-      <RouterProvider router={router} />
+      <ThemeProvider theme={theme}>
+        <Routes>
+          <Route path="/" element={<DashboardLayout basename={basename} />}>
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+          </Route>
+        </Routes>
+      </ThemeProvider>
     </StyledEngineProvider>
   );
 }

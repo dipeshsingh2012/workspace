@@ -1,18 +1,15 @@
 {
   "name": "workspace",
   "version": "1.0.0",
-  "description": "Remote MFE providing the Workspace Admin Dashboard",
+  "description": "Vite React Micro Front End (Remote)",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "build:remote": "vite build && echo 'Remote entry generated at /dist/workspace.js'",
+    "dev": "vite build --watch",
+    "build": "tsc && vite build",
+    "build:watch": "vite build --watch",
+    "clean": "rm -rf dist",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview --port 3000 --strictPort",
-    "serve": "npm run build && npm run preview",
     "prepare": "husky || true",
-    "test": "vitest run",
-    "test:watch": "vitest",
     "type-check": "tsc --noEmit"
   },
   "keywords": [],
@@ -34,19 +31,14 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.1",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.2.0",
-    "@testing-library/dom": "^10.4.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.18",
     "husky": "^9.1.7",
-    "jsdom": "^26.0.0",
     "postcss": "^8.5.2",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.9.3",
-    "vite": "^5.4.1",
-    "vitest": "^3.0.5"
+    "vite": "^5.4.1"
   }
 }

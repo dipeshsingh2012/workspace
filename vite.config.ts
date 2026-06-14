@@ -1,15 +1,16 @@
-/// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
 
-export default defineConfig({
-  plugins: [
+export default defineConfig(() => {
+  const base = 'auto';
+  return {
+    base,
+    plugins: [
     react(),
     federation({
       name: 'workspace',
       filename: 'workspace.js',
-      // Modules to expose
       exposes: {
         './App': './src/App.tsx',
       },
@@ -21,19 +22,13 @@ export default defineConfig({
     }),
   ],
   build: {
-    assetsInlineLimit: 0,
     modulePreload: false,
     target: 'esnext',
-    minify: false,
+    minify: true,
     cssCodeSplit: false,
+    rollupOptions: {
+      input: 'src/App.tsx',
+    },
   },
-  server: {
-    port: 3000, // Optional: specify a port
-  },
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/setup.ts',
-    css: true,
-  },
+  };
 });
