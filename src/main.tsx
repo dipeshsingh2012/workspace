@@ -11,6 +11,6 @@ if (!rootElement) {
 
 ReactDOM.createRoot(rootElement).render(
   <StrictMode>
-    <App />
+    <App basename="/" />
   </StrictMode>
 );

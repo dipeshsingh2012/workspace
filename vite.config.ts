@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     federation({
       name: 'workspace',
-      filename: 'remoteEntry.js',
+      filename: 'workspace.js',
       // Modules to expose
       exposes: {
         './App': './src/App.tsx',
@@ -32,7 +32,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './src/test/setup.ts',
+    setupFiles: './src/setup.ts',
     css: true,
   },
 });

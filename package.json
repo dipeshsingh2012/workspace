@@ -1,11 +1,12 @@
 {
   "name": "workspace",
   "version": "1.0.0",
-  "description": "Vite React Micro Front End (Remote)",
+  "description": "Remote MFE providing the Workspace Admin Dashboard",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:remote": "vite build && echo 'Remote entry generated at /dist/workspace.js'",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview --port 3000 --strictPort",
     "serve": "npm run build && npm run preview",

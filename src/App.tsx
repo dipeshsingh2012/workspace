@@ -84,18 +84,22 @@ const About: React.FC = () => (
   </div>
 );
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <DashboardLayout />,
-    children: [
-      { index: true, element: <Home /> },
-      { path: 'about', element: <About /> },
-    ],
-  },
-]);
+interface AppProps {
+  basename?: string;
+}
 
-function App() {
+export function App({ basename = '/' }: AppProps) {
+  const router = React.useMemo(() => createBrowserRouter([
+    {
+      path: '/',
+      element: <DashboardLayout />,
+      children: [
+        { index: true, element: <Home /> },
+        { path: 'about', element: <About /> },
+      ],
+    },
+  ], { basename }), [basename]);
+
   return (
     <StyledEngineProvider injectFirst>
       <RouterProvider router={router} />
