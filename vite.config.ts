@@ -17,7 +17,10 @@ export default defineConfig(() => {
       shared: {
         react: { singleton: true },
         'react-dom': { singleton: true },
-        'react-router-dom': { singleton: true }
+        'react-router-dom': { singleton: true },
+        '@mui/material': { singleton: true },
+        '@emotion/react': { singleton: true },
+        '@emotion/styled': { singleton: true },
       },
     }),
   ],
@@ -28,9 +31,6 @@ export default defineConfig(() => {
     cssCodeSplit: false,
     assetsDir: '',
     sourcemap: false, // Keep the remote bundle light
-    rollupOptions: {
-      input: 'src/App.tsx',
-    },
   },
   };
 });
