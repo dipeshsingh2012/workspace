@@ -17,9 +17,12 @@ import {
   ListItemText, 
   CssBaseline,
   createTheme,
-  ThemeProvider
+  ThemeProvider,
+  Theme
 } from '@mui/material';
-import { Home as HomeIcon, Info as InfoIcon, Dashboard as DashboardIcon } from '@mui/icons-material';
+import HomeIcon from '@mui/icons-material/Home';
+import InfoIcon from '@mui/icons-material/Info';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 // Create a theme with a component prefix to avoid class name collisions with the Host
 const theme = createTheme({
@@ -34,7 +37,7 @@ const DashboardLayout: FC<{ basename: string }> = ({ basename }) => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+      <AppBar position="fixed" sx={{ zIndex: (theme: Theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar className="bg-blue-700">
           <DashboardIcon sx={{ mr: 2 }} />
           <Typography variant="h6" noWrap component="div">
